@@ -1,7 +1,7 @@
 {
-  "name": "@curveball/starter",
+  "name": "@evert/tt",
   "version": "0.0.1",
-  "description": "Minimal curveball starter template",
+  "description": "A time tracking API",
   "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "tsc",
@@ -45,6 +45,7 @@
   "dependencies": {
     "@curveball/accesslog": "^0.2.0",
     "@curveball/bodyparser": "^0.4.6",
+    "@curveball/browser": "^0.16.1",
     "@curveball/controller": "^0.3.0",
     "@curveball/core": "^0.16.3",
     "@curveball/problem": "^0.3.0",
