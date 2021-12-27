@@ -6,15 +6,25 @@ import * as clientService from '../service';
 
 class ClientCollection extends Controller {
 
-  get(ctx: Context) {
+  async get(ctx: Context) {
 
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
-      clientService.findAll()
+      await clientService.findAll()
     ); 
 
   }
-  post() { }
+  async post(ctx: Context) {
+
+    const body = ctx.request.body as any;
+    const client = await clientService.create({
+      name: body.name,
+    });
+
+    ctx.status = 201;
+    ctx.response.headers.set('Location', client.href);
+
+  }
 }
 
 export default new ClientCollection();

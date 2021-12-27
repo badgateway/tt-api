@@ -1,7 +1,13 @@
 export type Client = {
   id: number;
+  href: string;
   name: string;
+  modifiedAt: Date,
+  createdAt: Date,
 }
+
+export type NewClient =
+  Omit<Client, 'id' | 'href' | 'modifiedAt' | 'createdAt'>;
 
 export type Project = {
   id: number;

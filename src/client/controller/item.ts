@@ -6,11 +6,11 @@ import * as clientService from '../service';
 
 class ClientItem extends Controller {
 
-  get(ctx: Context) {
+  async get(ctx: Context) {
 
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.item(
-      clientService.findById(
+      await clientService.findById(
         +ctx.params.clientId, 
       )
     ); 

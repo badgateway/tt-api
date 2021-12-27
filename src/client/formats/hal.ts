@@ -8,7 +8,7 @@ export function collection(clients: Client[]) {
         href: '/client',
       },
       item: clients.map(client => ({
-        href: `/client/${client.id}`,
+        href: client.href,
         title: client.name
       })),
       
@@ -24,13 +24,12 @@ export function collection(clients: Client[]) {
 
 }
 
-
 export function item(client: Client) {
 
   return {
     _links: {
       self: {
-        href: `/client/${client.id}`,
+        href: client.href,
       },
       collection: {
         title: 'List of clients',
@@ -38,6 +37,8 @@ export function item(client: Client) {
       }
     },
     name: client.name,
+    createdAt: client.createdAt.toISOString(),
+    modifiedAt: client.modifiedAt.toISOString(),
   }
 
 }
