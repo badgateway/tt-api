@@ -10,7 +10,10 @@
     "start:watch": "npx tsc-watch --onSuccess 'node dist/index.js'",
     "watch": "tsc --watch",
     "lint": "eslint --quiet 'src/*.ts'",
-    "fix": "eslint --quiet 'src/**/*.ts' --fix"
+    "fix": "eslint --quiet 'src/**/*.ts' --fix",
+    "knex:migrate:make": "knex --knexfile src/knexfile.ts migrate:make -x ts",
+    "knex:migrate:latest": "knex --knexfile src/knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "knex --knexfile src/knexfile.ts migrate:rollback"
   },
   "repository": {
     "type": "git",
