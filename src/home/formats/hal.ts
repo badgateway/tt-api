@@ -19,7 +19,11 @@ export function home() {
       'client-collection': {
         href: '/client',
         title: 'List of clients',
-      }
+      },
+      'project-collection': {
+        href: '/project',
+        title: 'List of projects',
+      },
     },
   };
 
