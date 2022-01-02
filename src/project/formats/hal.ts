@@ -39,6 +39,10 @@ export function item(project: Project) {
         title: project.client.name,
         href: project.client.href,
       },
+      'entry-collection': {
+        title: 'List of time entries',
+        href: project.href + '/entry'
+      }
     },
     name: project.name,
     createdAt: project.createdAt.toISOString(),

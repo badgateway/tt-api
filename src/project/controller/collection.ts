@@ -1,5 +1,6 @@
 import Controller from '@curveball/controller';
 import { Context } from '@curveball/core';
+import { BadRequest } from '@curveball/http-errors';
 
 import * as projectService from '../service';
 import * as clientService from '../../client/service';
@@ -19,7 +20,20 @@ class ProjectCollection extends Controller {
 
     const body = ctx.request.body as any;
 
-    const client = await clientService.findById(body.clientId);
+    const clientUrl = ctx.request.links.get('client');
+    
+    if (!clientUrl) {
+      throw new BadRequest('A link with rel "client" must be provided');
+    }
+
+    const clientId = (clientUrl.href.split('/').pop())
+    if (!clientId) {
+      throw new BadRequest('The client link must be in the format /clients/123');
+    }
+
+    console.log(clientId);
+
+    const client = await clientService.findById(+clientId);
     const project = await projectService.create({
       name: body.name,
       client,
@@ -27,8 +41,6 @@ class ProjectCollection extends Controller {
 
     ctx.status = 201;
     ctx.response.headers.set('Location', project.href);
-    
-
   }
 
 }

@@ -34,6 +34,10 @@ export function item(client: Client) {
       collection: {
         title: 'List of clients',
         href: `/client`
+      },
+      'entry-collection': {
+        title: 'List of time entries',
+        href: client.href + '/entry'
       }
     },
     name: client.name,
