@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/curveball/starter#readme",
   "devDependencies": {
+    "@types/luxon": "^2.0.8",
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
@@ -52,9 +53,11 @@
     "@curveball/browser": "^0.16.1",
     "@curveball/controller": "^0.3.0",
     "@curveball/core": "^0.16.3",
+    "@curveball/links": "^0.1.5",
     "@curveball/problem": "^0.3.0",
     "@curveball/router": "^0.3.0",
     "knex": "^0.95.15",
+    "luxon": "^2.2.0",
     "mysql2": "^2.3.3"
   }
 }

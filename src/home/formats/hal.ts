@@ -24,6 +24,10 @@ export function home() {
         href: '/project',
         title: 'List of projects',
       },
+      'person-collection': {
+        href: '/person',
+        title: 'List of people',
+      },
     },
   };
 
