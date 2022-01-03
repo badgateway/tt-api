@@ -1,9 +1,12 @@
-import { Application } from '@curveball/core';
 import accessLog from '@curveball/accesslog';
-import problem from '@curveball/problem';
 import bodyParser from '@curveball/bodyparser';
 import browser from '@curveball/browser';
 import links from '@curveball/links';
+import problem from '@curveball/problem';
+import validator from '@curveball/validator';
+import { Application } from '@curveball/core';
+
+import * as path from 'path';
 
 import routes from './routes';
 
@@ -25,6 +28,12 @@ app.use(bodyParser());
 // The links middleware parses links from HAL request bodies or
 // HTTP Link headers, and makes them available in ctx.request.links
 app.use(links());
+
+// The validator middleware lets users easily validate request bodies
+// using JSON-Schema
+app.use(validator({
+  schemaPath: path.join(__dirname, '../node_modules/@evert/tt-types/schema')
+}));
 
 app.use(...routes);
 

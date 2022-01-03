@@ -4,6 +4,8 @@ import { Context } from '@curveball/core';
 import * as hal from '../formats/hal';
 import * as clientService from '../service';
 
+import { ClientNew as ClientNewSchema } from '@evert/tt-types';
+
 class ClientCollection extends Controller {
 
   async get(ctx: Context) {
@@ -16,7 +18,9 @@ class ClientCollection extends Controller {
   }
   async post(ctx: Context) {
 
-    const body = ctx.request.body as any;
+    ctx.request.validate<ClientNewSchema>('https://tt.badgateway.net/schema/client-new.json');
+
+    const body = ctx.request.body;
     const client = await clientService.create({
       name: body.name,
     });

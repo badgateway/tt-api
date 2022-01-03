@@ -6,6 +6,8 @@ import * as projectService from '../service';
 import * as clientService from '../../client/service';
 import * as hal from '../formats/hal';
 
+import { ProjectNew as ProjectNewSchema } from '@evert/tt-types';
+
 class ProjectCollection extends Controller {
 
   async get(ctx: Context) {
@@ -18,7 +20,9 @@ class ProjectCollection extends Controller {
   }
   async post(ctx: Context) {
 
-    const body = ctx.request.body as any;
+    ctx.request.validate<ProjectNewSchema>('https://tt.badgateway.net/schema/project-new.json');
+
+    const body = ctx.request.body;
 
     const clientUrl = ctx.request.links.get('client');
     
@@ -30,8 +34,6 @@ class ProjectCollection extends Controller {
     if (!clientId) {
       throw new BadRequest('The client link must be in the format /clients/123');
     }
-
-    console.log(clientId);
 
     const client = await clientService.findById(+clientId);
     const project = await projectService.create({

@@ -1,6 +1,7 @@
 import Controller from '@curveball/controller';
 import { Context } from '@curveball/core';
 import { BadRequest } from '@curveball/http-errors';
+import { EntryNew as EntryNewSchema } from '@evert/tt-types';
 
 import * as entryService from '../service';
 import * as projectService from '../../project/service';
@@ -24,10 +25,12 @@ class EntryCollectionPerson extends Controller {
 
   async post(ctx: Context) {
 
+    ctx.request.validate<EntryNewSchema>('https://tt.badgateway.net/schema/entry-new.json');
+
     const person = await personService.findById(
         +ctx.params.personId, 
     );
-    const body = ctx.request.body as any;
+    const body = ctx.request.body;
 
     const projectUrl = ctx.request.links.get('project');
     
