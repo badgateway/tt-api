@@ -6,6 +6,7 @@ export function collection(clients: Client[]) {
     _links: {
       self: {
         href: '/client',
+        title: 'Clients',
       },
       item: clients.map(client => ({
         href: client.href,
