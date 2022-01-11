@@ -5,6 +5,7 @@ import links from '@curveball/links';
 import problem from '@curveball/problem';
 import validator from '@curveball/validator';
 import { Application } from '@curveball/core';
+import cors from '@curveball/cors';
 
 import * as path from 'path';
 
@@ -28,6 +29,13 @@ app.use(bodyParser());
 // The links middleware parses links from HAL request bodies or
 // HTTP Link headers, and makes them available in ctx.request.links
 app.use(links());
+
+app.use(cors({
+  allowOrigin: [
+    'http://localhost:8902',
+    'http://127.0.0.1:8902',
+  ]
+}));
 
 // The validator middleware lets users easily validate request bodies
 // using JSON-Schema

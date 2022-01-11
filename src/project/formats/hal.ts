@@ -6,6 +6,7 @@ export function collection(projects: Project[]) {
     _links: {
       self: {
         href: '/project',
+        title: 'Projects',
       },
       item: projects.map(project => ({
         href: project.href,
