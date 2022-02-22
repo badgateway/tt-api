@@ -40,7 +40,7 @@ app.use(cors({
 // The validator middleware lets users easily validate request bodies
 // using JSON-Schema
 app.use(validator({
-  schemaPath: path.join(__dirname, '../node_modules/@evert/tt-types/schema')
+  schemaPath: path.join(__dirname, '../node_modules/@badgateway/tt-types/schema')
 }));
 
 app.use(...routes);
