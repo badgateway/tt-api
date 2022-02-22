@@ -1,3 +1,4 @@
+/* eslint no-console:0 "@typescript-eslint/no-var-requires": 0 */
 import knexInit from 'knex';
 const knexFile = require('./knexfile');
 
