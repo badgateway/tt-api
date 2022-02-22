@@ -6,7 +6,7 @@ import * as projectService from '../service';
 import * as clientService from '../../client/service';
 import * as hal from '../formats/hal';
 
-import { ProjectNew as ProjectNewSchema } from '@evert/tt-types';
+import { ProjectNew as ProjectNewSchema } from '@badgateway/tt-types';
 
 class ProjectCollection extends Controller {
 

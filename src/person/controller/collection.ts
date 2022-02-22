@@ -4,7 +4,7 @@ import { Context } from '@curveball/core';
 import * as hal from '../formats/hal';
 import * as personService from '../service';
 
-import { PersonNew as PersonNewSchema } from '@evert/tt-types';
+import { PersonNew as PersonNewSchema } from '@badgateway/tt-types';
 
 class PersonCollection extends Controller {
 

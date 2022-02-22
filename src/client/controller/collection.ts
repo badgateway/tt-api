@@ -4,7 +4,7 @@ import { Context } from '@curveball/core';
 import * as hal from '../formats/hal';
 import * as clientService from '../service';
 
-import { ClientNew as ClientNewSchema } from '@evert/tt-types';
+import { ClientNew as ClientNewSchema } from '@badgateway/tt-types';
 
 class ClientCollection extends Controller {
 
