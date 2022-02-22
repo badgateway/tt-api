@@ -13,12 +13,12 @@ class PersonCollection extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
       await personService.findAll()
-    ); 
+    );
 
   }
   async post(ctx: Context) {
- 
-    ctx.request.validate<PersonNewSchema>('https://tt.badgateway.net/schema/person-new.json')
+
+    ctx.request.validate<PersonNewSchema>('https://tt.badgateway.net/schema/person-new.json');
 
     const body = ctx.request.body;
     const person = await personService.create({

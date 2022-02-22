@@ -12,7 +12,7 @@ export function collection(clients: Client[]) {
         href: client.href,
         title: client.name
       })),
-      
+
     },
 
     total: clients.length,
@@ -21,7 +21,7 @@ export function collection(clients: Client[]) {
       item: clients.map( client => item(client) )
     }
 
-  }
+  };
 
 }
 
@@ -34,7 +34,7 @@ export function item(client: Client) {
       },
       collection: {
         title: 'List of clients',
-        href: `/client`
+        href: '/client'
       },
       'entry-collection': {
         title: 'List of time entries',
@@ -44,6 +44,6 @@ export function item(client: Client) {
     name: client.name,
     createdAt: client.createdAt.toISOString(),
     modifiedAt: client.modifiedAt.toISOString(),
-  }
+  };
 
 }

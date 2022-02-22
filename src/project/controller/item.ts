@@ -10,7 +10,7 @@ class Project extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.item(
       await projectService.findById(
-        +ctx.params.projectId, 
+        +ctx.params.projectId,
       )
     );
   }

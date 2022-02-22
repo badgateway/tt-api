@@ -7,20 +7,20 @@ export async function findAll(): Promise<Project[]> {
 
   return Promise.all(
     (await knex.select().from('projects'))
-    .map( async (record) => {
-      return mapRecord(
-        record,
-        await clientService.findById(record.client_id)
-      );
-    })
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          await clientService.findById(record.client_id)
+        );
+      })
   );
 }
 
 export async function findById(id: number): Promise<Project> {
 
   const records = await knex.select()
-      .from('projects')
-      .where('id', id);
+    .from('projects')
+    .where('id', id);
 
   if (records.length === 0) {
     throw new NotFound(`Could not find project with id ${id}`);
@@ -61,6 +61,6 @@ function mapRecord(input: DbProject, client: Client): Project {
     name: input.name,
     createdAt: input.created_at,
     modifiedAt: input.modified_at
-  }
+  };
 
 }

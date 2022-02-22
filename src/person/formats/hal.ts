@@ -12,7 +12,7 @@ export function collection(people: Person[]) {
         href: person.href,
         title: person.name
       })),
-      
+
     },
 
     total: people.length,
@@ -21,7 +21,7 @@ export function collection(people: Person[]) {
       item: people.map( person => item(person) )
     }
 
-  }
+  };
 
 }
 
@@ -34,7 +34,7 @@ export function item(person: Person) {
       },
       collection: {
         title: 'List of people',
-        href: `/person`
+        href: '/person'
       },
       'entry-collection': {
         title: 'List of time entries',
@@ -44,6 +44,6 @@ export function item(person: Person) {
     name: person.name,
     createdAt: person.createdAt.toISOString(),
     modifiedAt: person.modifiedAt.toISOString(),
-  }
+  };
 
 }

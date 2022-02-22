@@ -13,13 +13,13 @@ class EntryCollectionPerson extends Controller {
   async get(ctx: Context) {
 
     const person = await personService.findById(
-        +ctx.params.personId, 
+      +ctx.params.personId,
     );
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
       person,
       await entryService.findByPerson(person),
-    ); 
+    );
 
   }
 
@@ -28,23 +28,23 @@ class EntryCollectionPerson extends Controller {
     ctx.request.validate<EntryNewSchema>('https://tt.badgateway.net/schema/entry-new.json');
 
     const person = await personService.findById(
-        +ctx.params.personId, 
+      +ctx.params.personId,
     );
     const body = ctx.request.body;
 
     const projectUrl = ctx.request.links.get('project');
-    
+
     if (!projectUrl) {
       throw new BadRequest('A link with rel "project" must be provided');
     }
 
-    const projectId = (projectUrl.href.split('/').pop())
+    const projectId = (projectUrl.href.split('/').pop());
     if (!projectId) {
       throw new BadRequest('The project link must be in the format /projects/123');
     }
 
     const project = await projectService.findById(+projectId);
-    
+
     const entry = await entryService.create({
       person,
       project,

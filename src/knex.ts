@@ -25,7 +25,7 @@ export interface DbPerson {
 
 export interface DbEntry {
   id: number;
-  
+
   date: Date;
   minutes: number;
 
@@ -36,8 +36,8 @@ export interface DbEntry {
 
   billable: number;
 
-  modified_at: Date,
-  created_at: Date,
+  modified_at: Date;
+  created_at: Date;
 
 }
 
@@ -47,7 +47,7 @@ declare module 'knex/types/tables' {
 
     clients: DbClient;
     projects: DbProject;
-    person: DbPerson; 
+    person: DbPerson;
 
   }
 

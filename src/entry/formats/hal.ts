@@ -22,7 +22,7 @@ export function collection(owner: Person | Client | Project, entries: Entry[]) {
       item: entries.map( entry => item(entry) )
     }
 
-  }
+  };
 
 }
 
@@ -56,6 +56,6 @@ export function item(entry: Entry) {
     billable: entry.billable,
     createdAt: entry.createdAt.toISOString(),
     modifiedAt: entry.modifiedAt.toISOString(),
-  }
+  };
 
 }

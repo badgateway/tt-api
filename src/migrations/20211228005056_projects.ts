@@ -1,4 +1,4 @@
-import { Knex } from "knex";
+import { Knex } from 'knex';
 
 
 export async function up(knex: Knex): Promise<void> {
@@ -12,7 +12,7 @@ export async function up(knex: Knex): Promise<void> {
       table.foreign('client_id').references('clients.id');
     });
 
-};
+}
 
 export async function down(knex: Knex) {
 
