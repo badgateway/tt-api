@@ -10,13 +10,13 @@ class EntryCollectionProject extends Controller {
   async get(ctx: Context) {
 
     const project = await projectService.findById(
-        +ctx.params.projectId, 
+      +ctx.params.projectId,
     );
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
       project,
       await entryService.findByProject(project)
-    ); 
+    );
 
   }
 

@@ -11,7 +11,7 @@ class Entry extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.item(
       await entryService.findById(
-        +ctx.params.entryId, 
+        +ctx.params.entryId,
       )
     );
   }

@@ -11,9 +11,9 @@ class PersonItem extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.item(
       await personService.findById(
-        +ctx.params.personId, 
+        +ctx.params.personId,
       )
-    ); 
+    );
 
   }
 }

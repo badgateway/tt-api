@@ -15,7 +15,7 @@ class ProjectCollection extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
       await projectService.findAll()
-    ); 
+    );
 
   }
   async post(ctx: Context) {
@@ -25,12 +25,12 @@ class ProjectCollection extends Controller {
     const body = ctx.request.body;
 
     const clientUrl = ctx.request.links.get('client');
-    
+
     if (!clientUrl) {
       throw new BadRequest('A link with rel "client" must be provided');
     }
 
-    const clientId = (clientUrl.href.split('/').pop())
+    const clientId = (clientUrl.href.split('/').pop());
     if (!clientId) {
       throw new BadRequest('The client link must be in the format /clients/123');
     }

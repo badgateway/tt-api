@@ -2,8 +2,8 @@ export type Client = {
   id: number;
   href: string;
   name: string;
-  modifiedAt: Date,
-  createdAt: Date,
+  modifiedAt: Date;
+  createdAt: Date;
 }
 
 export type NewClient =
@@ -14,8 +14,8 @@ export type Project = {
   href: string;
   name: string;
   client: Client;
-  modifiedAt: Date,
-  createdAt: Date,
+  modifiedAt: Date;
+  createdAt: Date;
 }
 
 export type NewProject =
@@ -25,8 +25,8 @@ export type Person = {
   id: number;
   href: string;
   name: string;
-  modifiedAt: Date,
-  createdAt: Date,
+  modifiedAt: Date;
+  createdAt: Date;
 }
 
 export type NewPerson =
@@ -44,12 +44,12 @@ export type Entry = {
   description: string;
 
   person: Person;
-  project: Project
+  project: Project;
 
   billable: boolean;
 
-  modifiedAt: Date,
-  createdAt: Date,
+  modifiedAt: Date;
+  createdAt: Date;
 
 }
 

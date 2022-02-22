@@ -12,7 +12,7 @@ export function collection(projects: Project[]) {
         href: project.href,
         title: project.name
       })),
-      
+
     },
 
     total: projects.length,
@@ -21,7 +21,7 @@ export function collection(projects: Project[]) {
       item: projects.map( project => item(project) )
     }
 
-  }
+  };
 
 }
 
@@ -34,7 +34,7 @@ export function item(project: Project) {
       },
       collection: {
         title: 'List of projects',
-        href: `/project`
+        href: '/project'
       },
       client: {
         title: project.client.name,
@@ -48,6 +48,6 @@ export function item(project: Project) {
     name: project.name,
     createdAt: project.createdAt.toISOString(),
     modifiedAt: project.modifiedAt.toISOString(),
-  }
+  };
 
 }

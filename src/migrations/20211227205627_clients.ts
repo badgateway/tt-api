@@ -9,7 +9,7 @@ export async function up(knex: Knex) {
       table.timestamp('modified_at').notNullable();
     });
 
-};
+}
 
 export async function down(knex: Knex) {
 

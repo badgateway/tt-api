@@ -9,13 +9,13 @@ export async function findAll(): Promise<Entry[]> {
 
   return Promise.all(
     (await knex.select().from('entries'))
-    .map( async (record) => {
-      return mapRecord(
-        record,
-        await projectService.findById(record.project_id),
-        await personService.findById(record.person_id)
-      );
-    })
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          await projectService.findById(record.project_id),
+          await personService.findById(record.person_id)
+        );
+      })
   );
 }
 
@@ -27,13 +27,13 @@ export async function findByPerson(person: Person): Promise<Entry[]> {
       .from('entries')
       .where('person_id', person.id)
     )
-    .map( async (record) => {
-      return mapRecord(
-        record,
-        await projectService.findById(record.project_id),
-        person,
-      );
-    })
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          await projectService.findById(record.project_id),
+          person,
+        );
+      })
   );
 
 }
@@ -46,13 +46,13 @@ export async function findByProject(project: Project): Promise<Entry[]> {
       .from('entries')
       .where('project_id', project.id)
     )
-    .map( async (record) => {
-      return mapRecord(
-        record,
-        project,
-        await personService.findById(record.person_id),
-      );
-    })
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          project,
+          await personService.findById(record.person_id),
+        );
+      })
   );
 
 }
@@ -65,13 +65,13 @@ export async function findByClient(client: Client): Promise<Entry[]> {
       .leftJoin('projects', 'entries.project_id', 'projects.id')
       .where('projects.client_id', client.id)
     )
-    .map( async (record) => {
-      return mapRecord(
-        record,
-        await projectService.findById(record.project_id),
-        await personService.findById(record.person_id)
-      );
-    })
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          await projectService.findById(record.project_id),
+          await personService.findById(record.person_id)
+        );
+      })
   );
 
 }
@@ -79,8 +79,8 @@ export async function findByClient(client: Client): Promise<Entry[]> {
 export async function findById(id: number): Promise<Entry> {
 
   const records = await knex.select()
-      .from('entries')
-      .where('id', id);
+    .from('entries')
+    .where('id', id);
 
   if (records.length === 0) {
     throw new NotFound(`Could not find entry with id ${id}`);
@@ -130,6 +130,6 @@ function mapRecord(input: DbEntry, project: Project, person: Person): Entry {
     billable: !!input.billable,
     createdAt: input.created_at,
     modifiedAt: input.modified_at
-  }
+  };
 
 }

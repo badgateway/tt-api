@@ -13,7 +13,7 @@ class ClientCollection extends Controller {
     ctx.response.type = 'application/hal+json';
     ctx.response.body = hal.collection(
       await clientService.findAll()
-    ); 
+    );
 
   }
   async post(ctx: Context) {

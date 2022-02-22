@@ -13,8 +13,8 @@ export async function findAll(): Promise<Person[]> {
 export async function findById(id: number): Promise<Person> {
 
   const records = await knex.select()
-      .from('people')
-      .where('id', id);
+    .from('people')
+    .where('id', id);
 
   if (records.length === 0) {
     throw new NotFound(`Could not find person with id ${id}`);
@@ -50,6 +50,6 @@ function mapRecord(input: DbPerson): Person {
     name: input.name,
     createdAt: input.created_at,
     modifiedAt: input.modified_at
-  }
+  };
 
 }
