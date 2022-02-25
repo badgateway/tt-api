@@ -52,6 +52,16 @@ export async function create(project: NewProject): Promise<Project> {
 
 }
 
+export async function update(project: Project): Promise<void> {
+
+  await knex('projects').update({
+    name: project.name,
+    client_id: project.client.id,
+    modified_at: new Date()
+  }).where({id: project.id});
+
+}
+
 function mapRecord(input: DbProject, client: Client): Project {
 
   return {
