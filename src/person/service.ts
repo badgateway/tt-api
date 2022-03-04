@@ -42,6 +42,15 @@ export async function create(person: NewPerson): Promise<Person> {
 
 }
 
+export async function update(person: Person): Promise<void> {
+
+  await knex('people').update({
+    name: person.name,
+    modified_at: new Date()
+  }).where({id : person.id});
+
+}
+
 function mapRecord(input: DbPerson): Person {
 
   return {

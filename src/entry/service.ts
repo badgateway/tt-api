@@ -76,11 +76,14 @@ export async function findByClient(client: Client): Promise<Entry[]> {
 
 }
 
-export async function findById(id: number): Promise<Entry> {
+export async function findById(person: Person, id: number): Promise<Entry> {
 
   const records = await knex.select()
     .from('entries')
-    .where('id', id);
+    .where({
+      id,
+      person_id: person.id,
+    });
 
   if (records.length === 0) {
     throw new NotFound(`Could not find entry with id ${id}`);
@@ -89,7 +92,7 @@ export async function findById(id: number): Promise<Entry> {
   return mapRecord(
     records[0],
     await projectService.findById(records[0].project_id),
-    await personService.findById(records[0].person_id)
+    person,
   );
 
 }
@@ -114,6 +117,19 @@ export async function create(entry: NewEntry): Promise<Entry> {
     createdAt: new Date(),
     modifiedAt: new Date()
   };
+
+}
+
+export async function update(entry: Entry): Promise<void> {
+
+  await knex('entries').insert({
+    project_id: entry.project.id,
+    date: entry.date,
+    minutes: entry.minutes,
+    description: entry.description,
+    billable: entry.billable,
+    modified_at: new Date()
+  }).where({id: entry.id});
 
 }
 
