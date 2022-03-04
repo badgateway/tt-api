@@ -1,6 +1,6 @@
 {
   "name": "@evert/tt",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "A time tracking API",
   "main": "dist/index.js",
   "scripts": {
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/curveball/starter#readme",
   "devDependencies": {
-    "@badgateway/tt-types": "^0.9.6",
+    "@badgateway/tt-types": "^0.10.0",
     "@types/luxon": "^2.0.8",
     "@types/node": "^16.11.25",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
