@@ -13,6 +13,9 @@ import entryCollectionProject from './entry/controller/project-collection';
 import entryCollectionPerson from './entry/controller/person-collection';
 import entry from './entry/controller/item';
 
+import sheetCollection from './sheet/controller/collection';
+import sheet from './sheet/controller/item';
+
 export default [
   router('/', home),
 
@@ -24,6 +27,8 @@ export default [
   router('/person/:personId', person),
   router('/person/:personId/entry', entryCollectionPerson),
   router('/person/:personId/entry/:entryId', entry),
+  router('/person/:personId/sheet', sheetCollection),
+  router('/person/:personId/sheet/:year/:weekNum', sheet),
 
   router('/project', projectCollection),
   router('/project/:projectId', project),

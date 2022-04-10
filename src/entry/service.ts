@@ -38,6 +38,33 @@ export async function findByPerson(person: Person): Promise<Entry[]> {
 
 }
 
+export async function findByPersonAndWeek(person: Person, year: number, weekNum: number): Promise<Entry[]> {
+
+  const start = DateTime.fromObject({
+    weekYear: year,
+    weekNumber: weekNum,
+  }).startOf('week');
+
+  const end = start.plus({days: 6});
+
+  return Promise.all(
+    (await knex
+      .select()
+      .from('entries')
+      .where('person_id', person.id)
+      .whereBetween('date', [start.toISODate(), end.toISODate()])
+    )
+      .map( async (record) => {
+        return mapRecord(
+          record,
+          await projectService.findById(record.project_id),
+          person,
+        );
+      })
+  );
+
+}
+
 export async function findByProject(project: Project): Promise<Entry[]> {
 
   return Promise.all(
@@ -122,7 +149,7 @@ export async function create(entry: NewEntry): Promise<Entry> {
 
 export async function update(entry: Entry): Promise<void> {
 
-  await knex('entries').insert({
+  await knex('entries').update({
     project_id: entry.project.id,
     date: entry.date,
     minutes: entry.minutes,

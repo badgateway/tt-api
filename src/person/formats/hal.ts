@@ -39,6 +39,15 @@ export function item(person: Person) {
       'entry-collection': {
         title: 'List of time entries',
         href: person.href + '/entry'
+      },
+      'sheet-collection': {
+        title: 'List of weekly time sheets',
+        href: person.href + '/sheet',
+      },
+      'search-sheet': {
+        title: 'Jump to a specific timesheet',
+        href: `${person.href}/sheet/{year}/{weekNum}`,
+        templated: true,
       }
     },
     name: person.name,
