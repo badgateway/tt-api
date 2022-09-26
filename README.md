@@ -34,7 +34,7 @@ Now when running 'npm i' the node modules will be downloaded.
 <br>
 
 ### Setting Up The Database
-Create a mysql database for this project. We're using "tt" as an identifier here often, shortform for "time tracking".
+Create a mysql database for this project. We're using "tt" as an identifier here often, shortform for "time tracking". Set the database user password `your_password` to your own appropriate password.
 ```
 mysql> CREATE DATABASE tt;
 mysql> CREATE USER 'tt' IDENTIFIED BY 'your_password';
