@@ -19,7 +19,7 @@ const app = new Application();
 // The accesslog middleware shows all requests and responses on the cli.
 app.use(accessLog());
 
-app.use(browser());
+app.use(browser({ title: 'Time Tracker API' }));
 
 // The problem middleware turns exceptions into application/problem+json error
 // responses.

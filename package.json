@@ -1,5 +1,5 @@
 {
-  "name": "@evert/tt",
+  "name": "@badgateway/tt-api",
   "version": "0.10.0",
   "description": "A time tracking API",
   "main": "dist/index.js",
@@ -28,9 +28,9 @@
   "author": "Evert Pot (https://evertpot.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curveball/starter/issues"
+    "url": "https://github.com/badgateway/tt-api/issues"
   },
-  "homepage": "https://github.com/curveball/starter#readme",
+  "homepage": "https://github.com/badgateway/tt-api#readme",
   "devDependencies": {
     "@badgateway/tt-types": "^0.10.0",
     "@types/luxon": "^2.0.8",
