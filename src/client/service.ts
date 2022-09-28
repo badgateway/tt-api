@@ -1,6 +1,7 @@
 import { Client, NewClient } from '../types';
 import { NotFound } from '@curveball/http-errors';
-import { knex, DbClient } from '../knex';
+import knex from '../db';
+import { ClientsRecord } from 'knex/types/tables';
 
 export async function findAll(): Promise<Client[]> {
 
@@ -51,7 +52,7 @@ export async function update(client: Client): Promise<void> {
 
 }
 
-function mapRecord(input: DbClient): Client {
+function mapRecord(input: ClientsRecord): Client {
 
   return {
     id: input.id,

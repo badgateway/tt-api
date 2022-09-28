@@ -8,8 +8,11 @@ import { Application } from '@curveball/core';
 import cors from '@curveball/cors';
 
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 
 import routes from './routes';
+
+dotenv.config();
 
 const app = new Application();
 

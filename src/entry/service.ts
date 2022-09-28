@@ -1,9 +1,10 @@
 import { Client, Project, Person, Entry, NewEntry } from '../types';
 import { NotFound } from '@curveball/http-errors';
-import { knex, DbEntry } from '../knex';
+import knex from '../db';
 import * as projectService from '../project/service';
 import * as personService from '../person/service';
 import { DateTime } from 'luxon';
+import { EntriesRecord } from 'knex/types/tables';
 
 export async function findAll(): Promise<Entry[]> {
 
@@ -160,7 +161,7 @@ export async function update(entry: Entry): Promise<void> {
 
 }
 
-function mapRecord(input: DbEntry, project: Project, person: Person): Entry {
+function mapRecord(input: EntriesRecord, project: Project, person: Person): Entry {
 
   return {
     id: input.id,

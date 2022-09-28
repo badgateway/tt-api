@@ -1,6 +1,7 @@
 import { Person, NewPerson } from '../types';
 import { NotFound } from '@curveball/http-errors';
-import { knex, DbPerson } from '../knex';
+import knex from '../db';
+import { PeopleRecord } from 'knex/types/tables';
 
 export async function findAll(): Promise<Person[]> {
 
@@ -51,7 +52,7 @@ export async function update(person: Person): Promise<void> {
 
 }
 
-function mapRecord(input: DbPerson): Person {
+function mapRecord(input: PeopleRecord): Person {
 
   return {
     id: input.id,
