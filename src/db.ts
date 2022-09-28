@@ -1,4 +1,4 @@
-import './types/pg';
+import './db-types';
 import knex from 'knex';
 import * as knexFile from './knexfile';
 
