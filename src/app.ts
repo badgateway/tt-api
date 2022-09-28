@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('dotenv').config();
+require('dotenv-defaults').config();
+
 import accessLog from '@curveball/accesslog';
 import bodyParser from '@curveball/bodyparser';
 import browser from '@curveball/browser';

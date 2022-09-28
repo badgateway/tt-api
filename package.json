@@ -60,6 +60,8 @@
     "@curveball/problem": "^0.3.0",
     "@curveball/router": "^0.4.1",
     "@curveball/validator": "^0.9.0",
+    "dotenv": "^16.0.2",
+    "dotenv-defaults": "^5.0.2",
     "knex": "^1.0.3",
     "luxon": "^2.2.0",
     "mysql2": "^2.3.3"
