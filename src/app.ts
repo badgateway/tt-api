@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-require('dotenv').config();
-require('dotenv-defaults').config();
-
 import accessLog from '@curveball/accesslog';
 import bodyParser from '@curveball/bodyparser';
 import browser from '@curveball/browser';
@@ -12,8 +8,11 @@ import { Application } from '@curveball/core';
 import cors from '@curveball/cors';
 
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 
 import routes from './routes';
+
+dotenv.config();
 
 const app = new Application();
 
