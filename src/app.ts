@@ -25,6 +25,16 @@ app.use(accessLog());
 
 app.use(browser({ title: 'Time Tracker API' }));
 
+app.use(session({
+  store: 'memory',
+  expiry: 3600 * 6,
+  cookieOptions: {
+    httpOnly: true,
+    sameSite: false,
+    path: '/'
+  },
+}));
+
 // The problem middleware turns exceptions into application/problem+json error
 // responses.
 app.use(problem());
@@ -59,15 +69,16 @@ const client = new OAuth2Client({
   introspectionEndpoint: '/introspect',
 });
 
-app.use(session({
-  store: 'memory',
-  cookieOptions: {
-    httpOnly: true,
-    // Without this, cookies will not be sent along after the first redirect
-    // from the OAuth2 server.
-    sameSite: false,
-  }
-}));
+// app.use(session({
+//   store: 'memory',
+//   cookieOptions: {
+//     httpOnly: true,
+//     // Without this, cookies will not be sent along after the first redirect
+//     // from the OAuth2 server.
+//     sameSite: false,
+//   }
+// }));
+
 
 app.use(browserToBearer({client}));
 
