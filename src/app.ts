@@ -35,8 +35,8 @@ app.use(links());
 
 app.use(cors({
   allowOrigin: [
-    'http://localhost:8902',
-    'http://127.0.0.1:8902',
+    'http://localhost:8901',
+    'http://127.0.0.1:8901',
   ]
 }));
 
