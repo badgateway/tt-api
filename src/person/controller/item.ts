@@ -25,7 +25,7 @@ class PersonItem extends Controller {
     const body = ctx.request.body;
     const person = await personService.findById(
       +ctx.params.personId,
-    )
+    );
 
     person.name = body.name;
 

@@ -60,7 +60,7 @@ app.use(validator({
   schemaPath: path.join(__dirname, '../node_modules/@badgateway/tt-types/schema')
 }));
 
-
+// a12n setup
 const client = new OAuth2Client({
   server: 'http://localhost:8531',
   clientId: 'tt-api',
@@ -68,17 +68,6 @@ const client = new OAuth2Client({
   tokenEndpoint: '/token',
   introspectionEndpoint: '/introspect',
 });
-
-// app.use(session({
-//   store: 'memory',
-//   cookieOptions: {
-//     httpOnly: true,
-//     // Without this, cookies will not be sent along after the first redirect
-//     // from the OAuth2 server.
-//     sameSite: false,
-//   }
-// }));
-
 
 app.use(browserToBearer({client}));
 
@@ -90,7 +79,6 @@ app.use(oauth2({
   ],
   client,
 }));
-
 
 
 app.use(...routes);
