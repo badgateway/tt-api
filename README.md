@@ -52,8 +52,6 @@ knex --knexfile src/knexfile.ts migrate:latest
 
 This should populate your database with the required tables.
 
-<br>
-
 ### Confiure OAuth2
 
 After a12n-server is running, and you have confirmed you can log in, you'll need to add an 'app' principal and OAuth 2 credentials. The easiest way to do this is by opening:
