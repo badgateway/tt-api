@@ -62,11 +62,9 @@ app.use(validator({
 
 // a12n setup
 const client = new OAuth2Client({
-  server: 'http://localhost:8531',
-  clientId: 'tt-api',
+  server: process.env.AUTH_API_URI,
+  clientId: process.env.OAUTH2_CLIENT_ID || 'tt-api',
   clientSecret: process.env.OAUTH2_CLIENT_SECRET,
-  tokenEndpoint: '/token',
-  introspectionEndpoint: '/introspect',
 });
 
 app.use(browserToBearer({client}));
@@ -74,8 +72,6 @@ app.use(browserToBearer({client}));
 app.use(oauth2({
   publicPrefixes: [
     '/health-check',
-    '/login',
-    '/register'
   ],
   client,
 }));
