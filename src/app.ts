@@ -71,7 +71,7 @@ app.use(browserToBearer({client}));
 
 app.use(oauth2({
   publicPrefixes: [
-    '/health-check',
+    '/health',
   ],
   client,
 }));
