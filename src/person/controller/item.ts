@@ -18,14 +18,14 @@ class PersonItem extends Controller {
     );
   }
 
-  async post(ctx: Context) {
+  async put(ctx: Context) {
 
     ctx.request.validate<PersonSchema>('https://tt.badgateway.net/schema/person.json');
 
     const body = ctx.request.body;
     const person = await personService.findById(
       +ctx.params.personId,
-    )
+    );
 
     person.name = body.name;
 
