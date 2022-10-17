@@ -54,5 +54,5 @@ This should populate your database with the required tables.
 <br>
 
 ## 🎬 Running
-From the root directory, initiate the project with `npm run start` (make sure the deps are installed).<br>
+From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).<br>
 The API server can be browsed at http://localhost:8901/.
