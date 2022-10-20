@@ -161,8 +161,11 @@ export async function update(entry: Entry): Promise<void> {
 
 }
 
-export async function deleteEntry(entry: Entry){
-  
+export async function deleteEntry(entry: Entry, project: Project): Promise<void>{
+  await knex('entries')
+    .where({project_id: project.id})
+    .where({id: entry.id})
+    .del();
 }
 
 function mapRecord(input: EntriesRecord, project: Project, person: Person): Entry {

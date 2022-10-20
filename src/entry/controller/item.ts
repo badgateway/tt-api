@@ -66,6 +66,40 @@ class Entry extends Controller {
 
   }
 
+  async delete(ctx: Context) {
+
+    const person = await personService.findById(
+      +ctx.params.personId,
+    );
+
+    const entry = await entryService.findById(
+      person,
+      +ctx.params.entryId,
+    );
+
+    const projectUrl = ctx.request.links.get('project');
+
+    if (!projectUrl) {
+      throw new BadRequest('A link with rel "project" must be provided');
+    }
+
+    const projectId = (projectUrl.href.split('/').pop());
+    if (!projectId) {
+      throw new BadRequest('The project link must be in the format /projects/123');
+    }
+
+    const project = await projectService.findById(+projectId);
+
+    await entryService.deleteEntry(entry, project);
+
+    ctx.response.status = 204;
+    // ctx.response.links.add({
+    //   rel: 'invalidates',
+    //   href: `/org/${org.id}/category`
+    // });
+
+  }
+
 }
 
 export default new Entry();
