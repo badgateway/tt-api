@@ -47,12 +47,8 @@ class Sheet extends Controller {
       weekYear: year,
       weekNumber: weekNum,
     }).startOf('week');
-
     const end = start.plus({days: 6});
-
     const date = DateTime.fromISO(body.date);
-
-
     if(start >= date || date >= end){
       throw new BadRequest('THe date of the entry must match with the week/year.');
     }
@@ -69,9 +65,6 @@ class Sheet extends Controller {
     }
 
     const project = await projectService.findById(+projectId);
-
-
-
 
     const entry = await entryService.create({
       person,
