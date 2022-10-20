@@ -161,6 +161,10 @@ export async function update(entry: Entry): Promise<void> {
 
 }
 
+export async function deleteEntry(entry: Entry){
+  
+}
+
 function mapRecord(input: EntriesRecord, project: Project, person: Person): Entry {
 
   return {
