@@ -49,7 +49,7 @@ class Sheet extends Controller {
     }).startOf('week');
     const end = start.plus({days: 6});
     const date = DateTime.fromISO(body.date);
-    if(start >= date || date >= end){
+    if(start > date || date > end){
       throw new BadRequest('THe date of the entry must match with the week/year.');
     }
 
