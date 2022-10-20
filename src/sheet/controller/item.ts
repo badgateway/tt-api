@@ -50,7 +50,7 @@ class Sheet extends Controller {
     const end = start.plus({days: 6});
     const date = DateTime.fromISO(body.date);
     if(start > date || date > end){
-      throw new BadRequest('THe date of the entry must match with the week/year.');
+      throw new BadRequest('The date of the entry must match with the week/year.');
     }
 
     const projectUrl = ctx.request.links.get('project');
