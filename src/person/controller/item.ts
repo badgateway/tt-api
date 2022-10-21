@@ -18,7 +18,7 @@ class PersonItem extends Controller {
     );
   }
 
-  async post(ctx: Context) {
+  async put(ctx: Context) {
 
     ctx.request.validate<PersonSchema>('https://tt.badgateway.net/schema/person.json');
 

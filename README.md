@@ -62,5 +62,5 @@ At the end of this process, this will give you a 'client secret'. Copy this secr
 Run `cp .env.defaults .env` to set up your configuration.
 
 ## 🎬 Running
-From the root directory, initiate the project with `npm run start` (make sure the deps are installed).<br>
+From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).<br>
 The API server can be browsed at http://localhost:8901/.
