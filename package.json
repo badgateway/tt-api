@@ -1,6 +1,6 @@
 {
   "name": "@badgateway/tt-api",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "A time tracking API",
   "main": "dist/index.js",
   "scripts": {
