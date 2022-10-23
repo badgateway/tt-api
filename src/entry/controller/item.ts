@@ -88,15 +88,14 @@ class Entry extends Controller {
       throw new BadRequest('The project link must be in the format /projects/123');
     }
 
-    const project = await projectService.findById(+projectId);
-
-    await entryService.deleteEntry(entry, project);
+    await entryService.deleteEntry(entry);
 
     ctx.response.status = 204;
-    // ctx.response.links.add({
-    //   rel: 'invalidates',
-    //   href: `/org/${org.id}/category`
-    // });
+    ctx.response.links.add({
+      rel: 'invalidates',
+      href: `/person/${entry.project.id}/entry`
+    });
+
 
   }
 

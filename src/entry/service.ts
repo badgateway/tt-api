@@ -161,9 +161,9 @@ export async function update(entry: Entry): Promise<void> {
 
 }
 
-export async function deleteEntry(entry: Entry, project: Project): Promise<void>{
+export async function deleteEntry(entry: Entry): Promise<void>{
   await knex('entries')
-    .where({project_id: project.id})
+    .where({project_id: entry.project.id})
     .where({id: entry.id})
     .del();
 }
