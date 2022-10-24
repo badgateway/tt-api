@@ -77,26 +77,13 @@ class Entry extends Controller {
       +ctx.params.entryId,
     );
 
-    const projectUrl = ctx.request.links.get('project');
-
-    if (!projectUrl) {
-      throw new BadRequest('A link with rel "project" must be provided');
-    }
-
-    const projectId = (projectUrl.href.split('/').pop());
-    if (!projectId) {
-      throw new BadRequest('The project link must be in the format /projects/123');
-    }
-
     await entryService.deleteEntry(entry);
 
     ctx.response.status = 204;
     ctx.response.links.add({
       rel: 'invalidates',
-      href: `/person/${entry.project.id}/entry`
+      href: `/person/${person.id}/entry`
     });
-
-
   }
 
 }
