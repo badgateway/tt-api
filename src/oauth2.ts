@@ -1,7 +1,5 @@
 import { OAuth2Client } from '@badgateway/oauth2-client';
 
-console.log('Loading oauth2 client');
-
 // a12n setup
 export default new OAuth2Client({
   server: process.env.AUTH_API_URI,
