@@ -66,6 +66,26 @@ class Entry extends Controller {
 
   }
 
+  async delete(ctx: Context) {
+
+    const person = await personService.findById(
+      +ctx.params.personId,
+    );
+
+    const entry = await entryService.findById(
+      person,
+      +ctx.params.entryId,
+    );
+
+    await entryService.deleteEntry(entry);
+
+    ctx.response.status = 204;
+    ctx.response.links.add({
+      rel: 'invalidates',
+      href: `/person/${person.id}/entry`
+    });
+  }
+
 }
 
 export default new Entry();
