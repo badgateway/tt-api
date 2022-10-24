@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import accessLog from '@curveball/accesslog';
 import bodyParser from '@curveball/bodyparser';
 import browser from '@curveball/browser';
@@ -9,14 +12,10 @@ import cors from '@curveball/cors';
 import session from '@curveball/session';
 import browserToBearer from '@curveball/browser-to-bearer';
 import oauth2 from '@curveball/oauth2';
-import { OAuth2Client } from '@badgateway/oauth2-client';
+import oauth2Client from './oauth2';
 
 import * as path from 'path';
-import * as dotenv from 'dotenv';
-
 import routes from './routes';
-
-dotenv.config();
 
 const app = new Application();
 
@@ -60,20 +59,16 @@ app.use(validator({
   schemaPath: path.join(__dirname, '../node_modules/@badgateway/tt-types/schema')
 }));
 
-// a12n setup
-const client = new OAuth2Client({
-  server: process.env.AUTH_API_URI,
-  clientId: process.env.OAUTH2_CLIENT_ID || 'tt-api',
-  clientSecret: process.env.OAUTH2_CLIENT_SECRET,
-});
 
-app.use(browserToBearer({client}));
+app.use(browserToBearer({
+  client: oauth2Client,
+}));
 
 app.use(oauth2({
   publicPrefixes: [
     '/health',
   ],
-  client,
+  client: oauth2Client,
 }));
 
 
