@@ -5,6 +5,7 @@ import * as hal from '../formats/hal';
 import * as clientService from '../service';
 
 import { ClientNew as ClientNewSchema } from '@badgateway/tt-types';
+import { addUserPrivilege } from '../../a12n';
 
 
 class ClientCollection extends Controller {
@@ -26,7 +27,10 @@ class ClientCollection extends Controller {
       name: body.name,
     });
 
-    clientService.addUserPrivilege(ctx, client);
+    addUserPrivilege(
+      ctx.state.oauth2._links['authenticated-as'].href,
+      ctx.request.origin,
+      client);
 
     ctx.status = 201;
     ctx.response.headers.set('Location', client.href);
