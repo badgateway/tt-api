@@ -6,6 +6,10 @@ import problem from '@curveball/problem';
 import validator from '@curveball/validator';
 import { Application } from '@curveball/core';
 import cors from '@curveball/cors';
+import session from '@curveball/session';
+import browserToBearer from '@curveball/browser-to-bearer';
+import oauth2 from '@curveball/oauth2';
+import { OAuth2Client } from '@badgateway/oauth2-client';
 
 import * as path from 'path';
 import * as dotenv from 'dotenv';
@@ -20,6 +24,16 @@ const app = new Application();
 app.use(accessLog());
 
 app.use(browser({ title: 'Time Tracker API' }));
+
+app.use(session({
+  store: 'memory',
+  expiry: 3600 * 6,
+  cookieOptions: {
+    httpOnly: true,
+    sameSite: false,
+    path: '/'
+  },
+}));
 
 // The problem middleware turns exceptions into application/problem+json error
 // responses.
@@ -42,6 +56,23 @@ app.use(cors({
 app.use(validator({
   schemaPath: path.join(__dirname, '../node_modules/@badgateway/tt-types/schema')
 }));
+
+// a12n setup
+const client = new OAuth2Client({
+  server: process.env.AUTH_API_URI,
+  clientId: process.env.OAUTH2_CLIENT_ID || 'tt-api',
+  clientSecret: process.env.OAUTH2_CLIENT_SECRET,
+});
+
+app.use(browserToBearer({client}));
+
+app.use(oauth2({
+  publicPrefixes: [
+    '/health',
+  ],
+  client,
+}));
+
 
 app.use(...routes);
 

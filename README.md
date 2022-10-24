@@ -34,6 +34,7 @@ Now when running 'npm i' the node modules will be downloaded.
 <br>
 
 ### Setting Up The Database
+
 Create a mysql database for this project. We're using "tt" as an identifier here often, shortform for "time tracking". Set the database user password `your_password` to your own appropriate password.
 ```
 mysql> CREATE DATABASE tt;
@@ -51,7 +52,14 @@ knex --knexfile src/knexfile.ts migrate:latest
 
 This should populate your database with the required tables.
 
-<br>
+### Configure OAuth2
+
+After a12n-server is running, and you have confirmed you can log in, you'll need to add an 'app' principal and OAuth 2 credentials. The easiest way to do this is by opening:
+
+http://localhost:8531/app/new?nickname=tt-api&url=http://localhost:8901/&clientId=tt-api&allowedGrantTypes=authorization_code,client_credentials,refresh_token&redirectUris=http://localhost:8901/_browser-auth
+
+At the end of this process, this will give you a 'client secret'. Copy this secret and add it to your .env file in the OAUTH2_CLIENT_SECRET value.
+Run `cp .env.defaults .env` to set up your configuration.
 
 ## 🎬 Running
 From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).<br>
