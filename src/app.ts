@@ -47,10 +47,7 @@ app.use(bodyParser());
 app.use(links());
 
 app.use(cors({
-  allowOrigin: [
-    'http://localhost:8902',
-    'http://127.0.0.1:8902',
-  ]
+  allowOrigin: ['*']
 }));
 
 // The validator middleware lets users easily validate request bodies
