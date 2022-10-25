@@ -72,12 +72,12 @@ class Entry extends Controller {
       +ctx.params.personId,
     );
 
-    const entryDate = DateTime.fromISO(entry.date);
-
     const entry = await entryService.findById(
       person,
       +ctx.params.entryId,
     );
+
+    const entryDate = DateTime.fromISO(entry.date);
 
     await entryService.deleteEntry(entry);
 
