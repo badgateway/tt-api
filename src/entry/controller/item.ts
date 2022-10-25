@@ -6,7 +6,7 @@ import * as entryService from '../service';
 import * as personService from '../../person/service';
 import * as projectService from '../../project/service';
 import * as hal from '../formats/hal';
-
+import {DateTime} from 'luxon';
 import { Entry as EntrySchema } from '@badgateway/tt-types';
 
 class Entry extends Controller {
@@ -77,12 +77,18 @@ class Entry extends Controller {
       +ctx.params.entryId,
     );
 
+    const entryDate = DateTime.fromISO(entry.date);
+
     await entryService.deleteEntry(entry);
 
     ctx.response.status = 204;
     ctx.response.links.add({
       rel: 'invalidates',
       href: `/person/${person.id}/entry`
+    });
+    ctx.response.links.add({
+      rel: 'invalidates',
+      href: `/person/${person.id}/sheet/${entryDate.year}/${entryDate.weekNumber}`,
     });
   }
 
