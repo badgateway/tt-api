@@ -27,10 +27,12 @@ class ClientCollection extends Controller {
       name: body.name,
     });
 
-    addUserPrivilege(
+    await addUserPrivilege(
       ctx.state.oauth2._links['authenticated-as'].href,
-      ctx.request.origin,
-      client);
+      'owner',
+      client.href,
+      ctx.request.origin
+    );
 
     ctx.status = 201;
     ctx.response.headers.set('Location', client.href);

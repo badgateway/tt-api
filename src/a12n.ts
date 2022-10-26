@@ -3,11 +3,11 @@ import { LinkNotFound } from 'ketting';
 
 
 
-export async function addUserPrivilege(authenticatedAsHref: string, origin: string, resource: any): Promise<void> {
+export async function addUserPrivilege(principal: string, privilege: string, resource: string, origin: string): Promise<void> {
   let userPrivilegesRes;
 
   try {
-    userPrivilegesRes = await ketting.go(authenticatedAsHref).follow('privileges');
+    userPrivilegesRes = await ketting.go(principal).follow('privileges');
   } catch (err) {
     if (err instanceof LinkNotFound) {
       throw new Error('Link with "privileges" is not found on the user resource. This could mean that the tt-api APP in a12n-server does not have the *admin" privilege');
@@ -21,7 +21,7 @@ export async function addUserPrivilege(authenticatedAsHref: string, origin: stri
   }
   await userPrivilegesState.action('add').submit({
     action: 'add',
-    privilege: 'owner',
-    resource: new URL(resource.href, origin).toString()
+    privilege,
+    resource: new URL(resource, origin).toString()
   });
 }
