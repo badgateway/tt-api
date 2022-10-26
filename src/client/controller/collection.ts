@@ -27,11 +27,11 @@ class ClientCollection extends Controller {
       name: body.name,
     });
 
+    const resource = new URL(client.href, ctx.request.origin).toString(),
     await addUserPrivilege(
       ctx.state.oauth2._links['authenticated-as'].href,
       'owner',
-      client.href,
-      ctx.request.origin
+      resource
     );
 
     ctx.status = 201;

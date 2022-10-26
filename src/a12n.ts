@@ -3,7 +3,7 @@ import { LinkNotFound } from 'ketting';
 
 
 
-export async function addUserPrivilege(principal: string, privilege: string, resource: string, origin: string): Promise<void> {
+export async function addUserPrivilege(principal: string, privilege: string, resource: string): Promise<void> {
   let userPrivilegesRes;
 
   try {
@@ -22,6 +22,6 @@ export async function addUserPrivilege(principal: string, privilege: string, res
   await userPrivilegesState.action('add').submit({
     action: 'add',
     privilege,
-    resource: new URL(resource, origin).toString()
+    resource
   });
 }
