@@ -31,6 +31,7 @@ export type EntriesRecord = {
   billable: number;
   created_at: Date;
   modified_at: Date;
+  version: number;
 }
 
 export type PeopleRecord = {
