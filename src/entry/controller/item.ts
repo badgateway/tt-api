@@ -18,13 +18,13 @@ class Entry extends Controller {
     const person = await personService.findById(
       +ctx.params.personId,
     );
-
-    ctx.response.body = hal.item(
-      await entryService.findById(
-        person,
-        +ctx.params.entryId,
-      )
+    const entry = await entryService.findById(
+      person,
+      +ctx.params.entryId,
     );
+
+    ctx.response.body = hal.item(entry);
+    ctx.response.headers.set('ETag', '"' + entry.version + '"');
   }
 
   async put(ctx: Context) {

@@ -50,6 +50,9 @@ export function item(entry: Entry) {
         href: entry.person.href
       }
     },
+    _headers: {
+      ETag: '"' + entry.version + '"',
+    },
     description: entry.description,
     date: entry.date,
     minutes: entry.minutes,

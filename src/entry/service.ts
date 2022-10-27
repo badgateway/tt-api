@@ -135,13 +135,15 @@ export async function create(entry: NewEntry): Promise<Entry> {
     description: entry.description,
     billable: entry.billable,
     created_at: new Date(),
-    modified_at: new Date()
+    modified_at: new Date(),
+    version: 1,
   });
 
   return {
     ...entry,
     id: result[0],
     href: `/person/${entry.person.id}/entry/${result[0]}`,
+    version: 1,
     createdAt: new Date(),
     modifiedAt: new Date()
   };
@@ -150,14 +152,17 @@ export async function create(entry: NewEntry): Promise<Entry> {
 
 export async function update(entry: Entry): Promise<void> {
 
-  await knex('entries').update({
-    project_id: entry.project.id,
-    date: entry.date,
-    minutes: entry.minutes,
-    description: entry.description,
-    billable: entry.billable,
-    modified_at: new Date()
-  }).where({id: entry.id});
+  await knex('entries')
+    .update({
+      project_id: entry.project.id,
+      date: entry.date,
+      minutes: entry.minutes,
+      description: entry.description,
+      billable: entry.billable,
+      modified_at: new Date(),
+    })
+    .increment('version', 1)
+    .where({id: entry.id});
 
 }
 
@@ -180,7 +185,8 @@ function mapRecord(input: EntriesRecord, project: Project, person: Person): Entr
     description: input.description,
     billable: !!input.billable,
     createdAt: input.created_at,
-    modifiedAt: input.modified_at
+    modifiedAt: input.modified_at,
+    version: input.version,
   };
 
 }

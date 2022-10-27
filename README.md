@@ -47,7 +47,7 @@ mysql> FLUSH PRIVILEGES;
 
 Populate the database using knex, which should add tables automatically.<br>
 ```
-knex --knexfile src/knexfile.ts migrate:latest
+make knex-migrate
 ```
 
 This should populate your database with the required tables.

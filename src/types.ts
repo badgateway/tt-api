@@ -50,8 +50,9 @@ export type Entry = {
 
   modifiedAt: Date;
   createdAt: Date;
+  version: number;
 
 }
 
 export type NewEntry =
-  Omit<Entry, 'id' | 'href' | 'modifiedAt' | 'createdAt'>;
+  Omit<Entry, 'id' | 'href' | 'modifiedAt' | 'createdAt' | 'version'>;
