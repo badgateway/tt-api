@@ -5,6 +5,8 @@ import * as hal from '../formats/hal';
 import * as clientService from '../service';
 
 import { ClientNew as ClientNewSchema } from '@badgateway/tt-types';
+import { addUserPrivilege } from '../../a12n';
+
 
 class ClientCollection extends Controller {
 
@@ -24,6 +26,12 @@ class ClientCollection extends Controller {
     const client = await clientService.create({
       name: body.name,
     });
+
+    await addUserPrivilege(
+      ctx.state.oauth2._links['authenticated-as'].href,
+      'owner',
+      new URL(client.href, ctx.request.origin),
+    );
 
     ctx.status = 201;
     ctx.response.headers.set('Location', client.href);

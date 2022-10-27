@@ -3,6 +3,7 @@ import { NotFound } from '@curveball/http-errors';
 import knex from '../db';
 import { ClientsRecord } from 'knex/types/tables';
 
+
 export async function findAll(): Promise<Client[]> {
 
   return (
@@ -63,3 +64,4 @@ function mapRecord(input: ClientsRecord): Client {
   };
 
 }
+
