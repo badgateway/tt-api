@@ -74,7 +74,7 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
     client,
     name: input.name,
     createdAt: input.created_at,
-    modifiedAt: input.modified_at
+    modifiedAt: input.modified_at,
   };
 
 }

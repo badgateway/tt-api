@@ -31,7 +31,7 @@ export async function create(person: NewPerson): Promise<Person> {
     name: person.name,
     created_at: new Date(),
     modified_at: new Date(),
-    principal_uri: person.principalUri
+    principal_uri: person.principalUri,
   });
 
   return {
@@ -39,7 +39,7 @@ export async function create(person: NewPerson): Promise<Person> {
     id: result[0],
     href: `/person/${result[0]}`,
     createdAt: new Date(),
-    modifiedAt: new Date()
+    modifiedAt: new Date(),
   };
 
 }
@@ -48,7 +48,7 @@ export async function update(person: Person): Promise<void> {
 
   await knex('people').update({
     name: person.name,
-    modified_at: new Date()
+    modified_at: new Date(),
   }).where({id : person.id});
 
 }
