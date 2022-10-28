@@ -70,7 +70,6 @@ export function item(project: Project) {
             name: 'href',
             prompt: 'Href',
             required: true,
-            type: 'url',
             placeHolder: 'mailto:johndoe@badgateway.net',
           },
         ],
