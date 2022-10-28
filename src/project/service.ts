@@ -92,7 +92,6 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<vo
     }
 
 
-    // create a Person in knex
     await personService.create({
       name: params.name,
       principalUri,
