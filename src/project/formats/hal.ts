@@ -67,8 +67,8 @@ export function item(project: Project) {
             placeHolder: 'John Doe',
           },
           {
-            name: 'email',
-            prompt: 'Email',
+            name: 'href',
+            prompt: 'Href',
             required: true,
             type: 'url',
             placeHolder: 'mailto:johndoe@badgateway.net',
