@@ -34,7 +34,7 @@ export function item(project: Project) {
       },
       collection: {
         title: 'List of projects',
-        href: '/project'
+        href: '/project',
       },
       client: {
         title: project.client.name,
@@ -42,8 +42,38 @@ export function item(project: Project) {
       },
       'entry-collection': {
         title: 'List of time entries',
-        href: project.href + '/entry'
-      }
+        href: project.href + '/entry',
+      },
+    },
+    _templates: {
+      add: {
+        title: 'Add a Person to a Project',
+        method: 'POST',
+        contentType: 'application/json',
+        target: `${project.href}/person`,
+        properties: [
+          {
+            name: 'Role',
+            prompt: 'Role',
+            required: true,
+            options: {
+              inline: ['member', 'manager', 'owner'],
+            },
+          },
+          {
+            name: 'name',
+            prompt: 'Name',
+            required: true,
+            placeHolder: 'John Doe',
+          },
+          {
+            name: 'href',
+            prompt: 'Href',
+            required: true,
+            placeHolder: 'mailto:johndoe@badgateway.net',
+          },
+        ],
+      },
     },
     name: project.name,
     createdAt: project.createdAt.toISOString(),
