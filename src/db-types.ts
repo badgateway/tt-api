@@ -38,6 +38,7 @@ export type PeopleRecord = {
   name: string;
   created_at: Date;
   modified_at: Date;
+  principal_uri: string | null;
 }
 
 export type ProjectsRecord = {

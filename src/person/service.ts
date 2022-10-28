@@ -30,7 +30,8 @@ export async function create(person: NewPerson): Promise<Person> {
   const result = await knex('people').insert({
     name: person.name,
     created_at: new Date(),
-    modified_at: new Date()
+    modified_at: new Date(),
+    principal_uri: person.principalUri
   });
 
   return {
@@ -59,7 +60,20 @@ function mapRecord(input: PeopleRecord): Person {
     href: `/person/${input.id}`,
     name: input.name,
     createdAt: input.created_at,
-    modifiedAt: input.modified_at
+    modifiedAt: input.modified_at,
+    principalUri: input.principal_uri,
   };
 
+}
+
+export async function findByPrincipalUrl(principalUrl: string): Promise<Person> {
+  const records = await knex.select()
+    .from('people')
+    .where('principal_uri', principalUrl);
+
+  if (records.length === 0) {
+    throw new NotFound(`Could not find person: ${principalUrl}`);
+  }
+
+  return mapRecord(records[0]);
 }
