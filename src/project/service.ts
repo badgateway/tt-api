@@ -3,6 +3,7 @@ import { PersonProjectForm } from '@badgateway/tt-types';
 import { NotFound } from '@curveball/http-errors';
 import knex from '../db';
 import * as clientService from '../client/service';
+import * as personService from '../person/service';
 import { ProjectsRecord } from 'knex/types/tables';
 import ketting from '../ketting';
 
@@ -73,20 +74,40 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
     client,
     name: input.name,
     createdAt: input.created_at,
-    modifiedAt: input.modified_at
+    modifiedAt: input.modified_at,
   };
 
 }
 
 export async function  addPersonToProject(params: PersonProjectForm): Promise<void> {
 
-  const findUserRes = await ketting.follow('user-collection').follow('find-by-href', {href: params.href});
+  const principalUri = await findOrCreatePrincipal(params.href, params.name);
 
-  let principalUrl: string;
+  try {
+    await personService.findByPrincipalUrl(principalUri);
+  } catch(error) {
+
+    if(!(error instanceof NotFound)){
+      throw error;
+    }
+
+
+    await personService.create({
+      name: params.name,
+      principalUri,
+    });
+  }
+
+}
+
+export async function findOrCreatePrincipal(href: string, name: string): Promise<string> {
+  const findUserRes = await ketting.follow('user-collection').follow('find-by-href', {href});
+
+  let principalUri: string;
   try {
     // if a user exists
     const findUser = await findUserRes.get();
-    principalUrl = new URL(findUser.links.get('self')!.href, findUser.uri).toString();
+    principalUri = new URL(findUser.links.get('self')!.href, findUser.uri).toString();
   }
   catch(error: any){
 
@@ -98,19 +119,17 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<vo
     const userCollectionRes = await ketting.follow('user-collection');
     const newUser = await userCollectionRes.postFollow({
       data: {
-        nickname: params.name,
+        nickname: name,
         active: false,
         type: 'user',
         _links: {
           me: {
-            href: params.href,
+            href: href,
           }
         }
       }
     });
-    principalUrl = newUser.uri;
+    principalUri = newUser.uri;
   }
-
-  console.debug(principalUrl);
-
+  return principalUri;
 }

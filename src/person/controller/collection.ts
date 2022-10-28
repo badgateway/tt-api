@@ -23,6 +23,7 @@ class PersonCollection extends Controller {
     const body = ctx.request.body;
     const person = await personService.create({
       name: body.name,
+      principalUri: null,
     });
 
     ctx.status = 201;

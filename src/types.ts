@@ -27,6 +27,7 @@ export type Person = {
   name: string;
   modifiedAt: Date;
   createdAt: Date;
+  principalUri: string | null;
 }
 
 export type NewPerson =
