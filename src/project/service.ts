@@ -110,6 +110,7 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<vo
     });
     principalUrl = newUser.uri;
   }
+  // find person by principal url
 
   console.debug(principalUrl);
 
