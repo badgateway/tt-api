@@ -53,7 +53,7 @@ export function item(project: Project) {
         target: `${project.href}/person`,
         properties: [
           {
-            name: 'Role',
+            name: 'role',
             prompt: 'Role',
             required: true,
             options: {

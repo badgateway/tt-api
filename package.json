@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/badgateway/tt-api#readme",
   "devDependencies": {
-    "@badgateway/tt-types": "^0.10.0",
+    "@badgateway/tt-types": "^0.10.2",
     "@types/luxon": "^3.0.1",
     "@types/node": "^18.7.23",
     "@typescript-eslint/eslint-plugin": "^5.5.0",

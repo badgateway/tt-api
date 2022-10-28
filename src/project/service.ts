@@ -1,8 +1,10 @@
 import { Client, Project, NewProject } from '../types';
+import { PersonProjectForm } from '@badgateway/tt-types';
 import { NotFound } from '@curveball/http-errors';
 import knex from '../db';
 import * as clientService from '../client/service';
 import { ProjectsRecord } from 'knex/types/tables';
+import ketting from '../ketting';
 
 export async function findAll(): Promise<Project[]> {
 
@@ -73,5 +75,42 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
     createdAt: input.created_at,
     modifiedAt: input.modified_at
   };
+
+}
+
+export async function  addPersonToProject(params: PersonProjectForm): Promise<void> {
+
+  const findUserRes = await ketting.follow('user-collection').follow('find-by-href', {href: params.href});
+
+  let principalUrl: string;
+  try {
+    // if a user exists
+    const findUser = await findUserRes.get();
+    principalUrl = new URL(findUser.links.get('self')!.href, findUser.uri).toString();
+  }
+  catch(error: any){
+
+    if(error.status != 404){
+      throw error;
+    }
+    // if a user was not found
+
+    const userCollectionRes = await ketting.follow('user-collection');
+    const newUser = await userCollectionRes.postFollow({
+      data: {
+        nickname: params.name,
+        active: false,
+        type: 'user',
+        _links: {
+          me: {
+            href: params.href,
+          }
+        }
+      }
+    });
+    principalUrl = newUser.uri;
+  }
+
+  console.debug(principalUrl);
 
 }

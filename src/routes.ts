@@ -7,6 +7,7 @@ import person from './person/controller/item';
 import personCollection from './person/controller/collection';
 import project from './project/controller/item';
 import projectCollection from './project/controller/collection';
+import projectPersonCollection from './project/controller/person-collection';
 
 import entryCollectionClient from './entry/controller/client-collection';
 import entryCollectionProject from './entry/controller/project-collection';
@@ -33,5 +34,6 @@ export default [
   router('/project', projectCollection),
   router('/project/:projectId', project),
   router('/project/:projectId/entry', entryCollectionProject),
+  router('/project/:projectId/person', projectPersonCollection)
 
 ];
