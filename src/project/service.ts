@@ -1,4 +1,4 @@
-import { Client, Project, NewProject, Person } from '../types';
+import { Client, Project, NewProject } from '../types';
 import { PersonProjectForm } from '@badgateway/tt-types';
 import { NotFound } from '@curveball/http-errors';
 import knex from '../db';
@@ -6,6 +6,7 @@ import * as clientService from '../client/service';
 import * as personService from '../person/service';
 import { ProjectsRecord } from 'knex/types/tables';
 import ketting from '../ketting';
+import { addUserPrivilege } from '../a12n';
 
 export async function findAll(): Promise<Project[]> {
 
@@ -79,13 +80,14 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
 
 }
 
-export async function  addPersonToProject(params: PersonProjectForm): Promise<Person> {
+export async function  addPersonToProject(params: PersonProjectForm, projectId: number, origin: string): Promise<void> {
 
   const principalUri = await findOrCreatePrincipal(params.href, params.name);
 
-  let person : Person;
+  let project : Project;
   try {
-    person = await personService.findByPrincipalUrl(principalUri);
+    await personService.findByPrincipalUrl(principalUri);
+    project = await findById(projectId);
   } catch(error) {
 
     if(!(error instanceof NotFound)){
@@ -93,13 +95,21 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<Pe
     }
 
 
-    person = await personService.create({
+    await personService.create({
       name: params.name,
       principalUri,
     });
-    return person;
+    project = await findById(projectId);
+
+  } finally {
+    project = await findById(projectId);
+    await addUserPrivilege(
+      principalUri,
+      params.role,
+      new URL(project.href, origin),
+    );
+
   }
-  return person;
 
 }
 
