@@ -16,6 +16,7 @@ import oauth2Client from './oauth2';
 
 import * as path from 'path';
 import routes from './routes';
+import acl from './middleware/acl';
 
 const app = new Application();
 
@@ -68,6 +69,7 @@ app.use(oauth2({
   client: oauth2Client,
 }));
 
+app.use(acl());
 
 app.use(...routes);
 
