@@ -50,7 +50,7 @@ async function aclDocument(ctx: Context) {
         href: ctx.path
       }
     },
-    rules: aclEntries,
+    privileges: aclEntries,
   };
 
 }
