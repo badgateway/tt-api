@@ -2,6 +2,7 @@ import { PersonProjectForm } from '@badgateway/tt-types';
 import Controller from '@curveball/controller';
 import { Context } from '@curveball/core';
 import { addUserPrivilege } from '../../a12n';
+import { NotFound } from '@curveball/http-errors';
 
 import * as projectService from '../service';
 
@@ -22,6 +23,10 @@ class ProjectPersonCollection extends Controller {
     const person = await projectService.addPersonToProject(params);
     const projectId = +ctx.params.projectId;
     const project = await projectService.findById(projectId);
+
+    if(!person.principalUri){
+      throw new NotFound(`The principal_uri is missing on Person: ${person.id}.`);
+    }
 
     await addUserPrivilege(
       person.principalUri,
