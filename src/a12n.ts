@@ -36,6 +36,16 @@ export async function getPrivilegesForResource(resource: string|URL): Promise<Pr
     .follow('privilege-collection')
     .follow('search-resource-privileges', { resource: resource.toString() });
 
-  return (await privilegeSearchRes.get()).data;
+  const data: PrivilegeEntry[] = (await privilegeSearchRes.get()).data.privileges;
+
+  return data.map( entry => {
+
+    return {
+      resource: entry.resource,
+      privilege: entry.privilege,
+      principal: new URL(entry.principal, ketting.go().uri).toString(),
+    };
+
+  });
 
 }
