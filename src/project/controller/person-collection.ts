@@ -22,7 +22,7 @@ class ProjectPersonCollection extends Controller {
     const person = await projectService.addPersonToProject(params);
 
     await addUserPrivilege(
-      ctx.state.oauth2._links['authenticated-as'].href,
+      person.principalUri,
       params.role,
       new URL(person.href, ctx.request.origin),
     );
