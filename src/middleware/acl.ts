@@ -45,6 +45,9 @@ async function aclDocument(ctx: Context) {
       self: {
         href: ctx.path + '?acl',
         title: 'ACL rules for ' + ctx.path
+      },
+      about: {
+        href: ctx.path
       }
     },
     rules: aclEntries,
