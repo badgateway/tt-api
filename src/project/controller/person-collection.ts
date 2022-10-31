@@ -1,6 +1,7 @@
 import { PersonProjectForm } from '@badgateway/tt-types';
 import Controller from '@curveball/controller';
 import { Context } from '@curveball/core';
+import { addUserPrivilege } from '../../a12n';
 
 import * as projectService from '../service';
 
@@ -18,7 +19,13 @@ class ProjectPersonCollection extends Controller {
       href: ctx.request.body.href
     };
 
-    await projectService.addPersonToProject(params);
+    const person = await projectService.addPersonToProject(params);
+
+    await addUserPrivilege(
+      ctx.state.oauth2._links['authenticated-as'].href,
+      params.role,
+      new URL(person.href, ctx.request.origin),
+    );
 
     ctx.status = 201;
 

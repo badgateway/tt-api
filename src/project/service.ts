@@ -1,4 +1,4 @@
-import { Client, Project, NewProject } from '../types';
+import { Client, Project, NewProject, Person } from '../types';
 import { PersonProjectForm } from '@badgateway/tt-types';
 import { NotFound } from '@curveball/http-errors';
 import knex from '../db';
@@ -79,12 +79,13 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
 
 }
 
-export async function  addPersonToProject(params: PersonProjectForm): Promise<void> {
+export async function  addPersonToProject(params: PersonProjectForm): Promise<Person> {
 
   const principalUri = await findOrCreatePrincipal(params.href, params.name);
 
+  let person : Person;
   try {
-    await personService.findByPrincipalUrl(principalUri);
+    person = await personService.findByPrincipalUrl(principalUri);
   } catch(error) {
 
     if(!(error instanceof NotFound)){
@@ -92,11 +93,13 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<vo
     }
 
 
-    await personService.create({
+    person = await personService.create({
       name: params.name,
       principalUri,
     });
+    return person;
   }
+  return person;
 
 }
 
