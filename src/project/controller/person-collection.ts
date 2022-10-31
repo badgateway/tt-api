@@ -20,11 +20,13 @@ class ProjectPersonCollection extends Controller {
     };
 
     const person = await projectService.addPersonToProject(params);
+    const projectId = +ctx.params.projectId;
+    const project = await projectService.findById(projectId);
 
     await addUserPrivilege(
       person.principalUri,
       params.role,
-      new URL(person.href, ctx.request.origin),
+      new URL(project.href, ctx.request.origin),
     );
 
     ctx.status = 201;
