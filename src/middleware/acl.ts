@@ -34,6 +34,8 @@ function aclLink(ctx: Context) {
  */
 async function aclDocument(ctx: Context) {
 
+  ctx.privileges.require('admin');
+
   const aclEntries = await getPrivilegesForResource(
     new URL(ctx.path, ctx.request.origin)
   );
