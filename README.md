@@ -39,9 +39,8 @@ mysql> FLUSH PRIVILEGES;
 Run `cp .env.defaults .env` to set up your configuration. Update `.env` with the database username and password you set up.
 
 Populate the database using knex, which should add tables automatically.
-
-```
-npx knex --knexfile src/knexfile.ts migrate:latest
+```bash
+$ npx knex --knexfile src/knexfile.ts migrate:latest
 ```
 
 This should populate your database with the required tables.
@@ -53,6 +52,15 @@ After a12n-server is running, and you have confirmed you can log in, you'll need
 http://localhost:8531/app/new?nickname=tt-api&url=http://localhost:8901/&clientId=tt-api&allowedGrantTypes=authorization_code,client_credentials,refresh_token&redirectUris=http://localhost:8901/_browser-auth
 
 At the end of this process, this will give you a 'client secret'. Copy this secret and add it to your `.env` file in the OAUTH2_CLIENT_SECRET value.
+
+Now that the app has been created, give it `*admin` privileges.
+```json
+{
+  "*": [
+    "admin"
+  ]
+}
+```
 
 ## 🎬 Running
 From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).
