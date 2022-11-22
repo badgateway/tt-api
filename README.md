@@ -2,8 +2,6 @@
 
 A project to track work on projects for clients.
 
-<br>
-
 ## 📦 Getting started
 
 ### Requirements Overview
@@ -11,11 +9,8 @@ A project to track work on projects for clients.
 The following are required to run this project:
 
 - Node & NPM installed, package dependencies installed `npm i`.
-- Knex installed globally `sudo npm i knex -g`.
 - [Authenticated your local NPM with github packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token) for access to private Badgateway github packages.
 - MySQL database set up and running.
-
-<br>
 
 ### Gaining Access to Private Badgateway Github Packages
 
@@ -31,8 +26,6 @@ Follow the steps here:
 
 Now when running 'npm i' the node modules will be downloaded.
 
-<br>
-
 ### Setting Up The Database
 
 Create a mysql database for this project. We're using "tt" as an identifier here often, shortform for "time tracking". Set the database user password `your_password` to your own appropriate password.
@@ -43,11 +36,12 @@ mysql> GRANT SELECT, REFERENCES, INSERT, UPDATE, DELETE, ALTER, CREATE, DROP ON 
 mysql> FLUSH PRIVILEGES;
 ```
 
-<br>
+Run `cp .env.defaults .env` to set up your configuration. Update `.env` with the database username and password you set up.
 
-Populate the database using knex, which should add tables automatically.<br>
+Populate the database using knex, which should add tables automatically.
+
 ```
-knex --knexfile src/knexfile.ts migrate:latest
+npx knex --knexfile src/knexfile.ts migrate:latest
 ```
 
 This should populate your database with the required tables.
@@ -58,9 +52,9 @@ After a12n-server is running, and you have confirmed you can log in, you'll need
 
 http://localhost:8531/app/new?nickname=tt-api&url=http://localhost:8901/&clientId=tt-api&allowedGrantTypes=authorization_code,client_credentials,refresh_token&redirectUris=http://localhost:8901/_browser-auth
 
-At the end of this process, this will give you a 'client secret'. Copy this secret and add it to your .env file in the OAUTH2_CLIENT_SECRET value.
-Run `cp .env.defaults .env` to set up your configuration.
+At the end of this process, this will give you a 'client secret'. Copy this secret and add it to your `.env` file in the OAUTH2_CLIENT_SECRET value.
 
 ## 🎬 Running
-From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).<br>
+From the root directory, initiate the project with `make start-dev` (make sure the deps are installed).
+
 The API server can be browsed at http://localhost:8901/.
