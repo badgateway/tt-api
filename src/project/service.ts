@@ -6,6 +6,7 @@ import * as clientService from '../client/service';
 import * as personService from '../person/service';
 import { ProjectsRecord } from 'knex/types/tables';
 import ketting from '../ketting';
+import { addUserPrivilege } from '../a12n';
 
 export async function findAll(): Promise<Project[]> {
 
@@ -79,12 +80,14 @@ function mapRecord(input: ProjectsRecord, client: Client): Project {
 
 }
 
-export async function  addPersonToProject(params: PersonProjectForm): Promise<void> {
+export async function  addPersonToProject(params: PersonProjectForm, projectId: number, origin: string): Promise<void> {
 
   const principalUri = await findOrCreatePrincipal(params.href, params.name);
 
+  let project : Project;
   try {
     await personService.findByPrincipalUrl(principalUri);
+    project = await findById(projectId);
   } catch(error) {
 
     if(!(error instanceof NotFound)){
@@ -96,6 +99,16 @@ export async function  addPersonToProject(params: PersonProjectForm): Promise<vo
       name: params.name,
       principalUri,
     });
+    project = await findById(projectId);
+
+  } finally {
+    project = await findById(projectId);
+    await addUserPrivilege(
+      principalUri,
+      params.role,
+      new URL(project.href, origin),
+    );
+
   }
 
 }

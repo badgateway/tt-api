@@ -15,10 +15,12 @@ class ProjectPersonCollection extends Controller {
     const params = {
       role: ctx.request.body.role,
       name: ctx.request.body.name,
-      href: ctx.request.body.href
+      href: ctx.request.body.href,
     };
+    const projectId = +ctx.params.projectId;
+    const origin = ctx.request.origin;
 
-    await projectService.addPersonToProject(params);
+    await projectService.addPersonToProject(params, projectId, origin);
 
     ctx.status = 201;
 
